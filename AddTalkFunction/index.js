@@ -1,20 +1,12 @@
+/*
+ * Function名:  AddTalkFunction
+ * Author:      masaki.okabe
+ */
+
 'use strict';
 
 const AWS = require("aws-sdk");
 const dynamo = new AWS.DynamoDB.DocumentClient();
-
-let lineuserid = "";
-let bookid = "";
-let talklist = [] ;
-
-const putBookParam = {
-    TableName: "Book",
-    Item: {
-        "bookid": "",
-        "lineuserid": "",
-        "talklist": []
-    }
-};
 
 const createErrorResponse = (status, message, parameters) => {
     return {
@@ -25,6 +17,19 @@ const createErrorResponse = (status, message, parameters) => {
 };
 
 exports.handler = (event, context, callback) => {
+
+    let lineuserid = "";
+    let bookid = "";
+    let talklist = [] ;
+
+    const putBookParam = {
+        TableName: "Book",
+        Item: {
+            "bookid": "",
+            "lineuserid": "",
+            "talklist": []
+        }
+    };
 
     // パスパラメータを取得
     lineuserid = event.lineuserid;

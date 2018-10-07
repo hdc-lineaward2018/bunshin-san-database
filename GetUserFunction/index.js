@@ -1,7 +1,20 @@
+/*
+ * Function名:  GetUserFunction
+ * Author:      masaki.okabe
+ */
+
 'use strict';
 
 var AWS = require("aws-sdk");
 var dynamo = new AWS.DynamoDB.DocumentClient();
+
+const createErrorResponse = (status, message, parameters) => {
+    return {
+        "status": status,
+        "ErrorMessage": message,
+        "Parameter": parameters
+    };
+};
 
 exports.handler = (event, context, callback) => {
     // パスパラメータからクエリキーを取得
@@ -9,14 +22,13 @@ exports.handler = (event, context, callback) => {
 
     if (!lineuserid ) {
         // 取得できなければエラーにする
-        // const response = createResponse({400, 'Bad Request. lineuserid  is required.');
-        const response = {
-            "status":400,
-            "ErrorMessage": "Bad Request. lineuserid is required.",
-            "Parameter":{
+        const response = createErrorResponse(
+            400,
+            "Bad Request. ineuserid are required.",
+            {
                 "lineuserid":lineuserid
             }
-        }
+        );
         context.succeed(response);
         return;
     }

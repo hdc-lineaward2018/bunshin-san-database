@@ -1,48 +1,14 @@
+/*
+ * Function名:  CreateUserFunction
+ * Author:      masaki.okabe
+ */
+
 'use strict';
 
 const AWS = require("aws-sdk");
 const uuidv1 = require('uuid/v1');
 
 const dynamo = new AWS.DynamoDB.DocumentClient();
-
-let lineuserid = "";
-let username = "";
-let bookname = "名称未設定";
-
-const putBookParam = {
-    TableName: "Book",
-    Item: {
-        "bookid": "",
-        "lineuserid": "",
-        "name": "",
-        "talklist": []
-    }
-};
-
-const putUserParam = {
-    TableName: "User",
-    Item: {
-        "lineuserid": "",
-        "name": "",
-        "editbookid": "",
-        "currentbookid": ""
-    }
-};
-
-const User = {
-    "lineuserid": "",
-    "name": "",
-    "currentbookid": "",
-    "editbookid": ""
-}
-
-
-const Book = {
-    "lineuserid": "",
-    "bookid": "",
-    "name": ""
-}
-
 
 const createErrorResponse = (status, message, parameters) => {
     return {
@@ -53,6 +19,44 @@ const createErrorResponse = (status, message, parameters) => {
 };
 
 exports.handler = (event, context, callback) => {
+
+    let lineuserid = "";
+    let username = "";
+    let bookname = "名称未設定";
+
+    const putBookParam = {
+        TableName: "Book",
+        Item: {
+            "bookid": "",
+            "lineuserid": "",
+            "name": "",
+            "talklist": []
+        }
+    };
+
+    const putUserParam = {
+        TableName: "User",
+        Item: {
+            "lineuserid": "",
+            "name": "",
+            "editbookid": "",
+            "currentbookid": ""
+        }
+    };
+
+    const User = {
+        "lineuserid": "",
+        "name": "",
+        "currentbookid": "",
+        "editbookid": ""
+    }
+
+
+    const Book = {
+        "lineuserid": "",
+        "bookid": "",
+        "name": ""
+    }
 
     // パスパラメータからクエリキーを取得
     lineuserid = event.lineuserid;

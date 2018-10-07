@@ -1,12 +1,18 @@
+/*
+ * Function名:  GetBookFunction
+ * Author:      masaki.okabe
+ */
+
 'use strict';
 
 var AWS = require("aws-sdk");
 var dynamo = new AWS.DynamoDB.DocumentClient();
 
-const createResponse = (status, message) => {
+const createErrorResponse = (status, message, parameters) => {
     return {
         "status": status,
-        "message": message
+        "ErrorMessage": message,
+        "Parameter": parameters
     };
 };
 
@@ -17,15 +23,14 @@ exports.handler = (event, context, callback) => {
 
     if (!lineuserid || !bookid) {
         // 取得できなければエラーにする
-        // const response = createResponse({400, 'Bad Request. lineuserid  and bookid are required.');
-        const response = {
-            "status": 400,
-            "ErrorMessage": "Bad Request. ineuserid and bookid are required.",
-            "Parameter":{
+        const response = createErrorResponse(
+            400,
+            "Bad Request. ineuserid and bookid are required.",
+            {
                 "lineuserid":lineuserid,
                 "bookid":bookid
             }
-        }
+        );
         callback(response);
         return;
     }

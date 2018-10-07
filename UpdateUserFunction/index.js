@@ -1,3 +1,8 @@
+/*
+ * Function名:  UpdateUserFunction
+ * Author:      masaki.okabe
+ */
+
 'use strict';
 
 const AWS = require("aws-sdk");
@@ -12,7 +17,6 @@ const createErrorResponse = (status, message, parameters) => {
 };
 
 exports.handler = (event, context, callback) => {
-
 
     var putUserParam = {
         TableName:"User",
