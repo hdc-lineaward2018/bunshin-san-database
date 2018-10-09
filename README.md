@@ -8,15 +8,15 @@ Using AWS Lambda and AWS DynamoDB.
 
 ### `/users` POST
 
-Create user.
+Create an user.
 
 ### `/users/{lineuserid}` GET
 
-Get user.
+Get an user searched by {lineuserid}.
 
 ### `/users/{lineuserid}` POST
 
-Update user.
+Update an user specified by {lineuserid}.
 
 ### `/users/{lineuserid}/books` POST
 
@@ -65,8 +65,9 @@ interface ErrorRespone {
 
 Bunshin-san users.
 
-It also includes information on books being edited and to be read.
-
+This model stores typical user information. Additionally, this includes which book User wants to edit and read out.
+Edditing book is specified by editbookid.
+Reading out book is specified by currentbookid.
 ```typescript
 interface User {
   lineuserid: string
@@ -78,7 +79,7 @@ interface User {
 
 ### Book
 
-A collection of Talk.
+This model stores book information which includes a collection of talks.
 
 ```typescript
 interface Book {
@@ -90,4 +91,4 @@ interface Book {
 
 ### Talk
 
-Minimum unit to read.
+Minimum unit to read out.
