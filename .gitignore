@@ -1,2 +1,5 @@
-# IDE設定は除外
+﻿# IDE設定は除外
 .idea/
+
+#node_modulesは除外
+node_modules/
